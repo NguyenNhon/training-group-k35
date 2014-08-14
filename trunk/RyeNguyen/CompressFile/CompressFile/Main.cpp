@@ -1,5 +1,5 @@
 #include "Compress.h"
-#include <string>
+#include <stdio.h>
 
 using namespace std;
 

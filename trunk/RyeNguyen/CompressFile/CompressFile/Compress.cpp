@@ -20,12 +20,17 @@ void Compressed2 ()
 	fclose (f);
 
 	char *p = buff;
+	//char *des = new char[size];
 
-	f = fopen ("source.rye", "wb");
+	f = fopen ("encode.rye", "wb");
 
-	while (p != NULL)
+	while (p + 1 != NULL)
 	{
 		char character = *p;
+		if (character < 0)
+		{
+			break;
+		}
 		int count = 1;
 		p++;
 
@@ -33,19 +38,23 @@ void Compressed2 ()
 		{
 			count++;
 			p++;
+			if (p == NULL)
+			{
+				break;
+			}
 		}
 
 		if (count < 2)
 		{
-			
+			fprintf (f, "%c", character);
 		}
 		else
 		{
-			
+			fprintf (f, "%c%c", (char)(count + 128), character);
 		}
 	}
 
-	char *b = new char[10];
+	fclose (f);
 }
 
 //Huffman algorithm
