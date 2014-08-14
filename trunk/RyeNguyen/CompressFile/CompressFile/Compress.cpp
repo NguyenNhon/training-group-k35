@@ -38,10 +38,6 @@ void Compressed2 ()
 		{
 			count++;
 			p++;
-			if (p == NULL)
-			{
-				break;
-			}
 		}
 
 		if (count < 2)

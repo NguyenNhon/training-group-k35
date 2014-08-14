@@ -3,8 +3,10 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Compress.cpp" />
+    <ClCompile Include="Decompress.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Compress.h" />
+    <ClInclude Include="Decompress.h" />
   </ItemGroup>
 </Project>
