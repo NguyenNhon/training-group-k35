@@ -1,4 +1,4 @@
-#include "Compress.h"
+#include "Compression.h"
 
 #include <stdio.h>
 #include <string>
@@ -6,8 +6,10 @@
 using namespace std;
 
 //Run-Length Encoding algorithm
-void Compressed2 ()
+void RLE_Compression ()
 {
+	////////////////////////////////////////////////////
+	//Open source file and read all content to buffer
 	FILE *f = fopen ("source.rye", "rb");
 
 	fseek (f, 0, SEEK_END);
@@ -19,22 +21,25 @@ void Compressed2 ()
 	buff[size] = NULL;
 
 	fclose (f);
+	////////////////////////////////////////////////////
 
 	char *p = buff;
 	string str;
 
 	while (p[0] != NULL)
 	{
-		char character = *p;
+		char character = p[0];
 		int count = 1;
 		p++;
 
+		//Count characters same with p[0]
 		while (p != NULL && p[0] == character)
 		{
 			count++;
 			p++;
 		}
 
+		//Write to buffer
 		if (count < 2)
 		{
 			str += character;
@@ -46,6 +51,8 @@ void Compressed2 ()
 		}
 	}
 
+	////////////////////////////////////////////////////
+	//Write from buffer to encode file
 	char *des = (char *)str.c_str ();
 
 	f = fopen ("encode.rye", "wb");
@@ -53,10 +60,11 @@ void Compressed2 ()
 	fwrite (des, 1, str.size (), f);
 
 	fclose (f);
+	////////////////////////////////////////////////////
 }
 
 //Huffman algorithm
-void Compressed1 ()
+void Huffman_Compression ()
 {
 	FILE *f = fopen ("source.rye", "rb");
 

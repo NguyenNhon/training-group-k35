@@ -1,15 +1,10 @@
-#include "Compress.h"
-#include "Decompress.h"
-#include <stdio.h>
-
-using namespace std;
+#include "Compression.h"
+#include "Decompression.h"
 
 int main ()
 {
-	//Compressed1 ();
-	
-	Compressed2 ();
-	Decompressed2 ();
+	RLE_Compression ();
+	RLE_Decompression ();
 
 	return 0;
 }

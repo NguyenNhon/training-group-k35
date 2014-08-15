@@ -65,13 +65,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Compress.cpp" />
-    <ClCompile Include="Decompress.cpp" />
+    <ClCompile Include="Compression.cpp" />
+    <ClCompile Include="Decompression.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Compress.h" />
-    <ClInclude Include="Decompress.h" />
+    <ClInclude Include="Compression.h" />
+    <ClInclude Include="Decompression.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
