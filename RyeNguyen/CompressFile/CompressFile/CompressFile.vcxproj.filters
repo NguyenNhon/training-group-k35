@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Compress.cpp" />
-    <ClCompile Include="Decompress.cpp" />
+    <ClCompile Include="Compression.cpp" />
+    <ClCompile Include="Decompression.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Compress.h" />
-    <ClInclude Include="Decompress.h" />
+    <ClInclude Include="Compression.h" />
+    <ClInclude Include="Decompression.h" />
   </ItemGroup>
 </Project>
