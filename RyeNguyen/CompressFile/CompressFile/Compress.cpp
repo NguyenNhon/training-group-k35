@@ -16,25 +16,20 @@ void Compressed2 ()
 
 	char *buff = new char[size];
 	fread (buff, size, 1, f);
+	buff[size] = NULL;
 
 	fclose (f);
 
 	char *p = buff;
-	//char *des = new char[size];
+	string str;
 
-	f = fopen ("encode.rye", "wb");
-
-	while (p + 1 != NULL)
+	while (p[0] != NULL)
 	{
 		char character = *p;
-		if (character < 0)
-		{
-			break;
-		}
 		int count = 1;
 		p++;
 
-		while (p[0] == character)
+		while (p != NULL && p[0] == character)
 		{
 			count++;
 			p++;
@@ -42,13 +37,20 @@ void Compressed2 ()
 
 		if (count < 2)
 		{
-			fprintf (f, "%c", character);
+			str += character;
 		}
 		else
 		{
-			fprintf (f, "%c%c", (char)(count + 128), character);
+			str += count;
+			str += character;
 		}
 	}
+
+	char *des = (char *)str.c_str ();
+
+	f = fopen ("encode.rye", "wb");
+
+	fwrite (des, 1, str.size (), f);
 
 	fclose (f);
 }
