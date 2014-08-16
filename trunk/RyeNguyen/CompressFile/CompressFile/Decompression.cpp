@@ -28,31 +28,13 @@ void RLE_Decompression ()
 
 	while (p[0] != NULL)
 	{
-		//Decide it's counts or control characters
-		if (p[0] == 10 || p[0] == 13)
+		//Control characters for sure
+		if ((p[0] == '\r' && p[1] == '\n') || (p[0] == '\n' && p[-1] == '\r'))
 		{
-			//Control characters
-			if (p[1] < 'A' || (p[1] > 'Z' && p[1] < 'a') || p[1] > 'z')
-			{
-				str += p[0];
-			}
-			else if (p[2] == p[1])
-			{
-				str += p[0];
-			}
-			//Counts
-			else
-			{
-				for (int i = 0; i < p[0]; i++)
-				{
-					str += p[1];
-				}
-
-				p++;
-			}
+			str += p[0];
 		}
 		//Check if there're 2 same character next to each other.
-		//The first of 2 character is counts.
+		//The first of 2 is counts. For example: "AA" mean 65 characters 'A'
 		else if ((p[0] >= 'A' && p[0] <= 'Z') || (p[0] >= 'a' && p[0] <= 'z'))
 		{
 			if (p[1] == p[0])
