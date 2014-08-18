@@ -1,57 +1,6 @@
-#include "Compression.h"
+#include "Huffman.h"
 
 #include <stdio.h>
-
-//Run-Length Encoding algorithm
-void RLE_Compression ()
-{
-	////////////////////////////////////////////////////
-	//Open source file and read all content to buffer
-	FILE *f = fopen ("source.rye", "rb");
-
-	fseek (f, 0, SEEK_END);
-	int size = ftell (f);
-	fseek (f, 0, SEEK_SET);
-
-	char *buff = new char[size];
-	fread (buff, size, 1, f);
-	buff[size] = NULL;
-
-	fclose (f);
-	////////////////////////////////////////////////////
-
-	char *p = buff;
-	char *des = new char[size * 1000];
-	int des_length = 0;
-
-
-	while (p[0] != NULL)
-	{
-		char character = p[0];
-		int count = 1;
-		p++;
-
-		//Count characters same with p[0]
-		while (p != NULL && *p == character)
-		{
-			count++;
-			p++;
-		}
-
-		//Write to buffer
-		sprintf (des + des_length, "%c%c", count, character);
-		des_length += 2;
-	}
-
-	////////////////////////////////////////////////////
-	//Write from buffer to encode file
-	f = fopen ("encode.rye", "wb");
-
-	fwrite (des, 1, des_length, f);
-
-	fclose (f);
-	////////////////////////////////////////////////////
-}
 
 //Huffman algorithm
 void Huffman_Compression ()
@@ -97,7 +46,7 @@ void Huffman_Compression ()
 	}
 
 	SortList (character_list, count_character);
-	
+
 	//UNDONE!!!
 }
 
@@ -121,4 +70,9 @@ void SortList (Node list[], int count)
 	}
 
 	return;
+}
+
+void Huffman_Decompression ()
+{
+
 }

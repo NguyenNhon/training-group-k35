@@ -1,5 +1,5 @@
-#ifndef __COMPRESSION_H__
-#define __COMPRESSION_H__
+#ifndef __HUFFMAN_H__
+#define __HUFFMAN_H__
 
 typedef struct Node
 {
@@ -8,9 +8,8 @@ typedef struct Node
 	char m_sign;
 };
 
-void RLE_Compression ();
-
 void Huffman_Compression ();
 void SortList (Node list[], int count);
+void Huffman_Decompression ();
 
 #endif
