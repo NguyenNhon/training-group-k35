@@ -17,13 +17,13 @@ void RLE_Compression ()
 	fclose (f);
 	////////////////////////////////////////////////////
 
+	int des_size = 0;
+
 	char *p = buff;
-	int des_length = 0;
-	int count_character = 0;
 
 	while (p != buff + size)
 	{
-		char character = p[0];
+		char character = *p;
 		int count = 1;
 		p++;
 
@@ -32,40 +32,47 @@ void RLE_Compression ()
 			p++;
 		}
 
-		count_character++;
-		des_length += 2;
+		des_size += 2;
 	}
 
-	char *des = new char[des_length];
-	int count_length = 0;
+	char *des = new char[des_size];
+	int des_current_size = 0;
 
 	p = buff;
 
-	while (count_length < count_character * 2)
+	while (des_current_size < des_size)
 	{
 		char character = *p;
 		int count = 1;
 		p++;
 
-		//Count characters same with p[0]
 		while (*p == character)
 		{
 			count++;
 			p++;
 		}
 
-		des[count_length] = count;
-		des[count_length + 1] = character;
-		count_length += 2;
+		des[des_current_size] = count;
+		des[des_current_size + 1] = character;
+		des_current_size += 2;
 	}
 
 	//Write from buffer to encode file
 	f = fopen ("encode.rye", "wb");
 
-	fwrite (des, sizeof(char), des_length, f);
+	fwrite (des, sizeof(char), des_size, f);
 
 	fclose (f);
 	////////////////////////////////////////////////////
+
+	delete[] buff;
+	buff = NULL;
+	p = NULL;
+
+	delete[] des;
+	des = NULL;
+
+	f = NULL;
 }
 
 void RLE_Decompression ()
@@ -79,22 +86,22 @@ void RLE_Decompression ()
 
 	char *buff = new char[size];
 	fread (buff, size, sizeof(char), f);
-	buff[size] = NULL;
 
 	fclose (f);
 	////////////////////////////////////////////////////
 
+	int des_size = 0;
+
 	char *p = buff;
-	int des_length = 0;
 
 	while (p != buff + size)
 	{
-		des_length += *p;
+		des_size += *p;
 		p += 2;
 	}
 
-	char *des = new char[des_length];
-	int char_position = 0;
+	char *des = new char[des_size];
+	int des_current_size = 0;
 
 	p = buff;
 
@@ -102,7 +109,7 @@ void RLE_Decompression ()
 	{
 		for (int i = 0; i < *p; i++)
 		{
-			des[char_position++] = *(p + 1);
+			des[des_current_size++] = *(p + 1);
 		}
 
 		p += 2;
@@ -111,8 +118,17 @@ void RLE_Decompression ()
 	//Write from buffer to decode file
 	f = fopen ("decode.rye", "wb");
 
-	fwrite (des, sizeof(char), des_length, f);
+	fwrite (des, sizeof(char), des_size, f);
 
 	fclose (f);
 	////////////////////////////////////////////////////
+
+	delete[] buff;
+	buff = NULL;
+	p = NULL;
+
+	delete[] des;
+	des = NULL;
+
+	f = NULL;
 }
