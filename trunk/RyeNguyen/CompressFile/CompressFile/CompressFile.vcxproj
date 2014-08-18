@@ -65,13 +65,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Compression.cpp" />
-    <ClCompile Include="Decompression.cpp" />
+    <ClCompile Include="RLE.cpp" />
+    <ClCompile Include="Huffman.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Compression.h" />
-    <ClInclude Include="Decompression.h" />
+    <ClInclude Include="Huffman.h" />
+    <ClInclude Include="RLE.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

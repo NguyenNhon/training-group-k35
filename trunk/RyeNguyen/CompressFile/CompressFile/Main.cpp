@@ -1,5 +1,4 @@
-#include "Compression.h"
-#include "Decompression.h"
+#include "RLE.h"
 
 int main ()
 {
