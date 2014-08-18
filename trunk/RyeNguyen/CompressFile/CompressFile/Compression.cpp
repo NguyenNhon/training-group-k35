@@ -1,9 +1,6 @@
 #include "Compression.h"
 
 #include <stdio.h>
-#include <string>
-
-using namespace std;
 
 //Run-Length Encoding algorithm
 void RLE_Compression ()
@@ -24,7 +21,9 @@ void RLE_Compression ()
 	////////////////////////////////////////////////////
 
 	char *p = buff;
-	string str;
+	char *des = new char[size * 1000];
+	int des_length = 0;
+
 
 	while (p[0] != NULL)
 	{
@@ -33,31 +32,22 @@ void RLE_Compression ()
 		p++;
 
 		//Count characters same with p[0]
-		while (p != NULL && p[0] == character)
+		while (p != NULL && *p == character)
 		{
 			count++;
 			p++;
 		}
 
 		//Write to buffer
-		if (count < 2)
-		{
-			str += character;
-		}
-		else
-		{
-			str += count;
-			str += character;
-		}
+		sprintf (des + des_length, "%c%c", count, character);
+		des_length += 2;
 	}
 
 	////////////////////////////////////////////////////
 	//Write from buffer to encode file
-	char *des = (char *)str.c_str ();
-
 	f = fopen ("encode.rye", "wb");
 
-	fwrite (des, 1, str.size (), f);
+	fwrite (des, 1, des_length, f);
 
 	fclose (f);
 	////////////////////////////////////////////////////
