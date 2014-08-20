@@ -47,7 +47,7 @@ void compressFile()
 	long fileSize = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
 
-	char* fileContent = new char[fileSize+1]();//clear allocate
+	char* fileContent = new char[fileSize+1]();
 	fileContent[fileSize] = 0;
 
 	fread(fileContent, sizeof(char), fileSize, fp);
@@ -149,32 +149,3 @@ void uncompressFile()
 
 	fclose(OutputFile);
 }
-
-
-//#include <stdio.h>
-//
-//class file
-//{
-//public:
-//	file();
-//	void compressFile();
-//	~file();
-//};
-//
-//file::file()
-//{
-//	printf("Nhap file du lieu: %s", );
-//
-//}
-//
-//
-//
-//file::~file()
-//{}
-//
-//int main()
-//{
-//
-//
-//	return 0;
-//}
