@@ -1,15 +1,22 @@
 #ifndef __HUFFMAN_H__
 #define __HUFFMAN_H__
 
-typedef struct Node
+typedef struct HuffNode
 {
 	char m_name;
 	int m_quantity;
-	char m_sign;
+	HuffNode *pLeft;
+	HuffNode *pRight;
 };
 
-void Huffman_Compression ();
-void SortList (Node list[], int count);
-void Huffman_Decompression ();
+typedef HuffNode* HuffTree;
+
+void HuffmanCompression ();
+void HuffmanDecompression ();
+
+int CountCharacter (char*, int);
+HuffNode* CreateNode (char*, int, int);
+void SortList (HuffNode *&, int);
+HuffTree CreateTree (HuffNode*, int);
 
 #endif
